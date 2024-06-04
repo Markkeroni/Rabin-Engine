@@ -44,6 +44,9 @@ public:
     const size_t &get_id() const;
 
     float get_movement_speed() const;
+    float get_pitch_speed() const;
+
+    bool get_kicked_state() const;
 #pragma endregion
 
 #pragma region Setters
@@ -58,6 +61,9 @@ public:
     void set_color(const Vec3 &newColor);
     
     void set_movement_speed(float speed);
+    void set_pitch_speed(float speed);
+
+    void set_kicked_state(bool state);
 #pragma endregion
 
     virtual void update(float dt);
@@ -91,6 +97,7 @@ private:
     const size_t id;
 
     float movementSpeed;
+    float pitchSpeed;
 
     static  std::vector<std::unique_ptr<DirectX::Model>> Agent::models;
     static std::unordered_map<AgentModel, size_t> agentModelMap;
@@ -105,4 +112,6 @@ private:
 
     // Additional variables
     AgentModel agentModel;
+    
+    bool kickedState;
 };

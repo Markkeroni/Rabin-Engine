@@ -25,8 +25,8 @@ std::vector<std::unique_ptr<DirectX::Model>> Agent::models;
 
 std::unordered_map<Agent::AgentModel, size_t> Agent::agentModelMap;
 
-Agent::Agent(const char *type, size_t id) : position(0.0f, 0.0f, 0.0f),
-    scaling(3.0f, 3.0f, 3.0f), eulerAngles(0.0f, 0.0f, 0.0f), isDirty(true), color(0.7f, 0.7f, 0.7f), type(type), id(id), movementSpeed(2000.0f / 2.3f)
+Agent::Agent(const char* type, size_t id) : position(0.0f, 0.0f, 0.0f),
+scaling(3.0f, 3.0f, 3.0f), eulerAngles(0.0f, 0.0f, 0.0f), isDirty(true), color(0.7f, 0.7f, 0.7f), type(type), id(id), movementSpeed(2000.0f / 2.3f), pitchSpeed(0.02f)
 {}
 
 #pragma region Getters
@@ -94,6 +94,15 @@ float Agent::get_movement_speed() const
     return movementSpeed;
 }
 
+float Agent::get_pitch_speed() const
+{
+    return pitchSpeed;
+}
+
+bool Agent::get_kicked_state() const {
+    return kickedState;
+}
+
 const Mat4 &Agent::get_local_to_world()
 {
     if (isDirty == true)
@@ -153,6 +162,15 @@ void Agent::set_movement_speed(float speed)
 {
     movementSpeed = speed;
 }
+
+void Agent::set_pitch_speed(float speed) {
+    pitchSpeed = speed;
+}
+
+void Agent::set_kicked_state(bool state) {
+    kickedState = state;
+}
+
 #pragma endregion
 
 void Agent::update(float dt)

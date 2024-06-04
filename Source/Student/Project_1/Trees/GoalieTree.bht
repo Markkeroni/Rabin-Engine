@@ -1,0 +1,4 @@
+TREENAME(GoalieTree)
+TREENODE(C_Sequencer, 0)
+TREENODE(L_MoveToMaxGoalLeft, 1)
+TREENODE(L_MoveToMaxGoalRight, 1)

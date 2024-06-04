@@ -29,10 +29,13 @@ public:
 
     // returns whether or not the point has been reached
     bool move_toward_point(const Vec3 &point, float dt);
+    // my own function to move to a pitch
+    bool move_toward_pitch(float pitch, float dt);
 
     const std::wstring &get_debug_name() const;
     std::wstringstream &get_debug_text();
     void add_debug_text(const std::wstring &nodeName);
+
 private:
     BehaviorTree tree;
     Blackboard blackboard;

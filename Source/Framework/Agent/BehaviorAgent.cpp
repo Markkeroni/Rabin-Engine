@@ -28,10 +28,13 @@ BehaviorAgent::BehaviorAgent(const char *type, size_t id) : Agent(type, id)
     set_movement_speed(10.0f);
 }
 
+
+
 Blackboard &BehaviorAgent::get_blackboard()
 {
     return blackboard;
 }
+
 
 BehaviorTree &BehaviorAgent::get_behavior_tree()
 {
@@ -82,6 +85,27 @@ bool BehaviorAgent::move_toward_point(const Vec3 &point, float dt)
         set_yaw(yaw);
     }
 
+    return result;
+}
+
+bool BehaviorAgent::move_toward_pitch(float pitch, float dt) {
+    bool result = false;
+    float currPitch = get_pitch();
+    auto delta = pitch - currPitch;
+    if (std::abs(delta) <= 0.01f) {
+        result = true;
+    }
+    else {
+        float actualSpeed = get_pitch_speed() * dt;
+        if (std::abs(delta) < actualSpeed) {
+           result = true;
+           actualSpeed = std::abs(delta);
+        }
+        float direction = delta < 0 ? -1.0f : 1.0f;
+        actualSpeed *= direction;
+        currPitch += actualSpeed;
+        set_pitch(currPitch);
+    }
     return result;
 }
 

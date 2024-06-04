@@ -5,13 +5,14 @@
 void ProjectOne::setup()
 {
     // Create an agent (using the default "Agent::AgentModel::Man" model)
-    auto man = agents->create_behavior_agent("ExampleAgent", BehaviorTreeTypes::Example);
+
 
     // You can change properties here or at runtime from a behavior tree leaf node
     // Look in Agent.h for all of the setters, like these:
-    // man->set_color(Vec3(1, 0, 1));
+    // man->set_position(Vec3(0, 0, 50)); // Spawn player at X centre of map
+    // man->set_yaw(1.5708); // Make player face the goal
+    // man->set_color(Vec3(0, 0, 1)); // Make player blue
     // man->set_scaling(Vec3(7,7,7));
-    // man->set_position(Vec3(100, 0, 100));
 
     // Create an agent with a different 3D model:
     // 1. (optional) Add a new 3D model to the framework other than the ones provided:
@@ -26,12 +27,54 @@ void ProjectOne::setup()
     Agent::add_model("Assets\\ball.sdkmesh", Agent::AgentModel::Ball);
     Agent::add_model("Assets\\hut.sdkmesh", Agent::AgentModel::Hut);
     // 3. Create the agent, giving it the correct AgentModel type.
-    auto tree = agents->create_behavior_agent("ExampleAgent2", BehaviorTreeTypes::Example, Agent::AgentModel::Tree);
+    //auto tree = agents->create_behavior_agent("ExampleAgent2", BehaviorTreeTypes::Example, Agent::AgentModel::Tree);
+    
     // 4. (optional) You can also set the pitch of the model, if you want it to be rotated differently
-    tree->set_pitch(PI / 2);
+    //tree->set_pitch(PI / 2);
+    
     // 5. (optional) Set other aspects to make it start out correctly
-    tree->set_color(Vec3(0, 0.5, 0));   // Set the tree to green
+    //tree->set_color(Vec3(0, 0.5, 0));   // Set the tree to green
 
+    /* ================================== Player Start ====================================*/
+    auto player = agents->create_behavior_agent("Player", BehaviorTreeTypes::PlayerTree); // Create player
+    player->set_position(Vec3(0, 0, 40)); // Spawn player near X centre of map
+    player->set_yaw(PI/2); // Make player face the goal
+    player->set_color(Vec3(0, 0, 1)); // Make player blue
+    player->set_scaling(Vec3(2, 2, 2)); // Make player scale 2
+    /* ================================== Player End ====================================*/
+
+    /* ================================== Left Post Start ====================================*/
+    auto leftPost = agents->create_behavior_agent("LeftPost", BehaviorTreeTypes::Idle, Agent::AgentModel::Hut);
+    leftPost->set_position(Vec3(100, 0, 20)); // Spawn left post at far end of map
+    leftPost->set_color(Vec3(0, 0, 0)); // Make left post black
+    leftPost->set_scaling(Vec3(0.1, 1.5, 0.1)); // Scale post to become stick   
+    /* ================================== Left Post  End  ====================================*/
+
+    /* ================================== Top Post Start ====================================*/
+    //auto topPost = agents->create_behavior_agent("TopPost", BehaviorTreeTypes::Idle, Agent::AgentModel::Tree);
+    /* ================================== Top Post  End  ====================================*/
+
+    /* ================================== Right Post Start ====================================*/
+    auto rightPost = agents->create_behavior_agent("RightPost", BehaviorTreeTypes::Idle, Agent::AgentModel::Hut);
+    rightPost->set_position(Vec3(100, 0, 80)); // Spawn left post at far end of map
+    rightPost->set_color(Vec3(0, 0, 0)); // Make left post black
+    rightPost->set_scaling(Vec3(0.1, 1.5, 0.1)); // Scale post to become stick   
+    /* ================================== Right Post  End  ====================================*/
+
+    /* ================================== Goalie Start ====================================*/
+    auto goalie = agents->create_behavior_agent("Goalie", BehaviorTreeTypes::GoalieTree); // Create player
+    goalie->set_position(Vec3(100, 0, 50)); // Spawn goalie at X centre, far end of map
+    goalie->set_yaw(2*PI - PI/2); // Make goalie face away from goal
+    goalie->set_color(Vec3(1, 0, 0)); // Make goalie blue
+    goalie->set_scaling(Vec3(2, 2, 2)); // Make golaie scale 2
+    /* ================================== Goalie  End  ====================================*/
+
+    /* ================================== Ball Start ====================================*/
+    auto ball = agents->create_behavior_agent("Ball", BehaviorTreeTypes::BallTree, Agent::AgentModel::Ball);
+    ball->set_position(Vec3(10, 2, 50)); // Spawn ball near middle back of map
+    ball->set_scaling(Vec3(0.4, 0.4, 0.4));
+    /* ================================== Ball  End  ====================================*/
+    
     // You can technically load any map you want, even create your own map file,
     // but behavior agents won't actually avoid walls or anything special, unless you code
     // that yourself (that's the realm of project 2)
@@ -44,8 +87,8 @@ void ProjectOne::setup()
 
     // Camera position can be modified from this default
     auto camera = agents->get_camera_agent();
-    camera->set_position(Vec3(-62.0f, 70.0f, terrain->mapSizeInWorld * 0.5f));
-    camera->set_pitch(0.610865); // 35 degrees
+    camera->set_position(Vec3(-62.0f, 40.0f, terrain->mapSizeInWorld * 0.5f));
+    camera->set_pitch(0.610865/2); // 35/2 degrees
 
     // Sound control (these sound functions can be kicked off in a behavior tree node - see the example in L_PlaySound.cpp)
     audioManager->SetVolume(0.5f);
