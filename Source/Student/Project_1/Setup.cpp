@@ -45,7 +45,7 @@ void ProjectOne::setup()
 
     /* ================================== Left Post Start ====================================*/
     auto leftPost = agents->create_behavior_agent("LeftPost", BehaviorTreeTypes::Idle, Agent::AgentModel::Hut);
-    leftPost->set_position(Vec3(100, 0, 20)); // Spawn left post at far end of map
+    leftPost->set_position(Vec3(100, 0, 25)); // Spawn left post at far end of map
     leftPost->set_color(Vec3(0, 0, 0)); // Make left post black
     leftPost->set_scaling(Vec3(0.1, 1.5, 0.1)); // Scale post to become stick   
     /* ================================== Left Post  End  ====================================*/
@@ -56,7 +56,7 @@ void ProjectOne::setup()
 
     /* ================================== Right Post Start ====================================*/
     auto rightPost = agents->create_behavior_agent("RightPost", BehaviorTreeTypes::Idle, Agent::AgentModel::Hut);
-    rightPost->set_position(Vec3(100, 0, 80)); // Spawn left post at far end of map
+    rightPost->set_position(Vec3(100, 0, 75)); // Spawn left post at far end of map
     rightPost->set_color(Vec3(0, 0, 0)); // Make left post black
     rightPost->set_scaling(Vec3(0.1, 1.5, 0.1)); // Scale post to become stick   
     /* ================================== Right Post  End  ====================================*/
@@ -68,6 +68,30 @@ void ProjectOne::setup()
     goalie->set_color(Vec3(1, 0, 0)); // Make goalie blue
     goalie->set_scaling(Vec3(2, 2, 2)); // Make golaie scale 2
     /* ================================== Goalie  End  ====================================*/
+
+    /* ================================== Spectator Start ====================================*/
+    auto spectator1 = agents->create_behavior_agent("Spectator", BehaviorTreeTypes::SpectatorTree, Agent::AgentModel::Man);
+    auto spectator2 = agents->create_behavior_agent("Spectator", BehaviorTreeTypes::SpectatorTree, Agent::AgentModel::Man);
+    auto spectator3 = agents->create_behavior_agent("Spectator", BehaviorTreeTypes::SpectatorTree, Agent::AgentModel::Man);
+    auto spectator4 = agents->create_behavior_agent("Spectator", BehaviorTreeTypes::SpectatorTree, Agent::AgentModel::Man);
+    auto spectator5 = agents->create_behavior_agent("Spectator", BehaviorTreeTypes::SpectatorTree, Agent::AgentModel::Man);
+    auto spectator6 = agents->create_behavior_agent("Spectator", BehaviorTreeTypes::SpectatorTree, Agent::AgentModel::Man);
+
+    spectator1->set_position(Vec3(25, 0, 100));
+    spectator2->set_position(Vec3(50, 0, 100));
+    spectator3->set_position(Vec3(75, 0, 100));
+    spectator4->set_position(Vec3(25, 0, 0));
+    spectator5->set_position(Vec3(50, 0, 0));
+    spectator6->set_position(Vec3(75, 0, 0));
+
+    spectator1->set_scaling(Vec3(2, 2, 2));
+    spectator2->set_scaling(Vec3(2, 2, 2));
+    spectator3->set_scaling(Vec3(2, 2, 2));
+    spectator4->set_scaling(Vec3(2, 2, 2));
+    spectator5->set_scaling(Vec3(2, 2, 2));
+    spectator6->set_scaling(Vec3(2, 2, 2));
+
+    /* ================================== Spectator  End  ====================================*/
 
     /* ================================== Ball Start ====================================*/
     auto ball = agents->create_behavior_agent("Ball", BehaviorTreeTypes::BallTree, Agent::AgentModel::Ball);
@@ -92,7 +116,8 @@ void ProjectOne::setup()
 
     // Sound control (these sound functions can be kicked off in a behavior tree node - see the example in L_PlaySound.cpp)
     audioManager->SetVolume(0.5f);
-    audioManager->PlaySoundEffect(L"Assets\\Audio\\retro.wav");
+    audioManager->PlayMusic(L"Assets\\Audio\\CrowdNoise.wav", true);
+    //audioManager->PlaySoundEffect(L"Assets\\Audio\\retro.wav");
     // Uncomment for example on playing music in the engine (must be .wav)
     // audioManager->PlayMusic(L"Assets\\Audio\\motivate.wav");
     // audioManager->PauseMusic(...);

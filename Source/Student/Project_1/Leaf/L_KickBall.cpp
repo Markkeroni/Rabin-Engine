@@ -41,6 +41,9 @@ void L_KickBall::on_update(float dt) {
 				// Set ball to kicked
 				ballAgent[0]->set_kicked_state(true);
 
+				// Reset agent
+				agent->set_pitch(0.0f);
+				drawBackFlag = false;
 				on_success();
 			}
 		}

@@ -24,7 +24,7 @@ void L_OnTarget::on_enter() {
 void L_OnTarget::on_update(float dt) {
 	auto result = agent->move_toward_point(targetPoint, dt);
 	if (result == true) {
-		agent->set_kicked_state(false);
+		
 		on_success();
 	}
 

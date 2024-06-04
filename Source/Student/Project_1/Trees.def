@@ -3,4 +3,5 @@
 #include "../Source/Student/Project_1/Trees/GoalieTree.bht"
 #include "../Source/Student/Project_1/Trees/Idle.bht"
 #include "../Source/Student/Project_1/Trees/PlayerTree.bht"
+#include "../Source/Student/Project_1/Trees/SpectatorTree.bht"
 #include "../Source/Student/Project_1/Trees/TestTree.bht"

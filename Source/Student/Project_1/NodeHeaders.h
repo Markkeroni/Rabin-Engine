@@ -18,6 +18,8 @@
 
 // Student Decorator Nodes
 #include "Decorator/D_Inverter.h"
+#include "Decorator/D_RepeatRandomTimes.h"
+#include "Decorator/D_DelaySetTime.h"
 
 // Example Leaf Nodes
 #include "Leaf/L_CheckMouseClick.h"
@@ -30,6 +32,7 @@
 // Student Leaf Nodes
 #include "Leaf/L_MoveToMaxGoalLeft.h"
 #include "Leaf/L_MoveToMaxGoalRight.h"
+#include "Leaf/L_RandomMoveGoalLine.h"
 #include "Leaf/L_KickBall.h"
 #include "Leaf/L_CheckRPressed.h"
 #include "Leaf/L_CheckKicked.h"
@@ -38,3 +41,10 @@
 #include "Leaf/L_MissLeft.h"
 #include "Leaf/L_MissRight.h"
 #include "Leaf/L_PlayFailSound.h"
+#include "Leaf/L_ResetBall.h"
+#include "leaf/L_PlayKickSound.h"
+#include "Leaf/L_SetFastSpeed.h"
+#include "Leaf/L_SetSlowSpeed.h"
+#include "Leaf/L_CheckDistanceToBall.h"
+#include "Leaf/L_Spin.h"
+#include "Leaf/L_Roll.h"
