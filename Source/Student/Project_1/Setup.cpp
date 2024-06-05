@@ -83,7 +83,7 @@ void ProjectOne::setup()
     spectator4->set_position(Vec3(25, 0, 0));
     spectator5->set_position(Vec3(50, 0, 0));
     spectator6->set_position(Vec3(75, 0, 0));
-
+    
     spectator1->set_scaling(Vec3(2, 2, 2));
     spectator2->set_scaling(Vec3(2, 2, 2));
     spectator3->set_scaling(Vec3(2, 2, 2));
